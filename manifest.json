@@ -7,7 +7,7 @@
         "tabs"
     ],
     "background": {
-        "service_worker": "eventscripts.js"
+        "service_worker": "background.js"
     },
     
     "host_permissions": [
