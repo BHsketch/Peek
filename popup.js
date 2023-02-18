@@ -1,18 +1,15 @@
-const SearchButton = document.querySelector['.Search'];
-console.log(data);
-SearchButton.onclick = async function (e) {
-  let data=document.getElementById('data').value;
-  console.log(data);
-  let queryOptions = { active: true, currentWindow: true };
-  let tab = await chrome.tabs.query(queryOptions);
+const SearchButton = document.getElementById('Submit');
 
-  chrome.tabs.sendMessage(
-    tabId,
-    { data: data},
-    function (response) {
-      console.log(response.status);
-    }
-  );
+console.log("popup1");
 
-};
- 
+SearchButton.addEventListener("click", (tabId, tab)=>{
+
+console.log("popup2");
+
+let stringdata = document.getElementById("data").value;
+
+chrome.storage.local.set({ key: stringdata}).then(() => {
+  console.log("Value is set to " + value);
+});
+  
+})

@@ -3,12 +3,19 @@
     "version": "0.1.0",
     "description": "A simple tool for searching through the contents of a YouTube video",
     "permissions": [
+        "nativeMessaging",
         "storage",
         "tabs"
     ],
     "background": {
         "service_worker": "background.js"
     },
+
+    "content_scripts" : [ 
+    { 
+    "matches" : ["https://*.youtube.com/*"], 
+    "js" : ["contentScript.js"] 
+    }],
     
     "host_permissions": [
         "https://*.youtube.com/*"
