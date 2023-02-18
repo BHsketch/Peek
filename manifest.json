@@ -5,7 +5,8 @@
     "permissions": [
         "nativeMessaging",
         "storage",
-        "tabs"
+        "webRequest",
+        "https://www.youtube.com/api/timedtext?lang={LANG}&v={VIDEO_ID}"
     ],
     "background": {
         "service_worker": "background.js"
