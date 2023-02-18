@@ -6,7 +6,7 @@
         "tabs",
         "storage",
         "webRequest",
-        "https://www.youtube.com/api/timedtext?*"
+        "https://www.youtube.com/api/timedtext?lang={LANG}&v={VIDEO_ID}"
     ],
     "host_permissions": [
         "https://*.youtube.com/*"
