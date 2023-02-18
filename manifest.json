@@ -3,13 +3,11 @@
     "version": "0.1.0",
     "description": "A simple tool for searching through the contents of a YouTube video",
     "permissions": [
+        "tabs",
         "storage",
-        "tabs"
+        "webRequest",
+        "https://www.youtube.com/api/timedtext?*"
     ],
-    "background": {
-        "service_worker": "background.js"
-    },
-    
     "host_permissions": [
         "https://*.youtube.com/*"
     ],
