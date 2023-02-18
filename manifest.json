@@ -1,0 +1,19 @@
+{
+    "name":"WordStamp",
+    "version":"1",
+    "description":"Practice for final",
+    "manifest_version":2,
+    "browser_action":
+    {
+        "default_popup":"popup.html",
+        "default_icon":{
+        "16":"./images/icon16.png",
+        "48":"./images/icon16.png",
+        "64":"./images/icon16.png"
+        }
+    },
+    "background":
+    {
+        "service_worker":"eventscripts.js"
+    }
+}
