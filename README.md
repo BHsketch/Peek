@@ -3,7 +3,7 @@
 This is basically an extension, in which you type the word you are searching for.
 Then the extension checks the timestamps of the occurrence of the string, and then highlights the part of the video.
 It checks transcripts, and then the timestamps is highlighted.
-We plan on  implementing  Natural Language processing for the videos with no captions.
+We plan on  implementing  Natural Language processing for the videos with no captions, so as to increase the accessibility and the utility of the project.
 
 
 ## Components:
