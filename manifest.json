@@ -1,0 +1,53 @@
+{
+    "manifest_version": 2,
+    "name": "Ctrl + F for YouTube",
+    "short_name": "YCS",
+    "description": "It's like 'ctrl + f' for YouTube",
+    "version": "0.1.0",
+    "permissions": [
+        "tabs",
+        "storage",
+        "webRequest",
+        "https://www.youtube.com/api/timedtext?*"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.youtube.com/*"
+            ],
+            "js": [
+                "contentScript.js"
+            ]
+        }
+    ],
+    "background": {
+        "scripts": [
+            "popup.js"
+        ],
+        "persistent": true,
+        "run_at": "document_start"
+    },
+    "browser_action": {
+        "default_icon": "images/icon16.png",
+        "default_popup": "popup.html"
+    },
+    "icons": {
+        "16": "images/icon16.png",
+        "32": "images/icon16.png",
+        "48": "images/icon16.png",
+        "128": "images/icon16.png"
+    },
+    "commands": {
+        "_execute_browser_action": {
+            "suggested_key": {
+                "windows": "Ctrl+Shift+Y",
+                "mac": "Command+Shift+I",
+                "chromeos": "Ctrl+Shift+Y",
+                "linux": "Ctrl+Shift+Y"
+            }
+        }
+    },
+    "web_accessible_resources": [
+        "style.css"
+    ]
+}
