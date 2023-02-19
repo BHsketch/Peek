@@ -1,0 +1,16 @@
+body{
+width: 288px;
+font-family: Helvetica, Ubuntu, Arial, sans-serif;
+background-color: beige;
+ opacity: 3;
+}
+input{
+    margin: 5px;
+    margin:auto;
+ margin-bottom: 4px;
+    width: 288px;
+    border-radius: 3px;
+    justify-content: center;
+    border-color: black;
+  
+}
