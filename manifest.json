@@ -8,7 +8,8 @@
         "tabs",
         "storage",
         "webRequest",
-        "https://www.youtube.com/api/timedtext?*"
+        "https://www.youtube.com/api/timedtext?*",
+        "scripting"
     ],
     "content_scripts": [
         {
