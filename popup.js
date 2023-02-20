@@ -1,6 +1,7 @@
 //Gets captions_url from network_log then sends over to content script for downloading + processing
 var prev_captions_url = "";
 let highlights = [];
+
 chrome.webRequest.onCompleted.addListener(
   function (details) {
     if (
@@ -53,19 +54,64 @@ function user_input(input) {
           console.log(timestamps);
           console.log(phrases);
 
+          //ADDING A TRIAL DOM MANIPULATION TO SEE WHICH HTML FILE IT CAN ACCESS
+          // var trydiv = document.createElement('div');
+          // trydiv.style.position = 'absolute';
+          // trydiv.style.display = 'block';
+          // trydiv.style.width = '20px';
+          // trydiv.style.height = '20px';
+          // trydiv.style.backgroundColor = 'red';
+          // trydiv.style.left = '10px';
+          // trydiv.style.top = '10px';
+          // trydiv.style.zIndex = '40';
+          // document.body.appendChild(trydiv);
+
           //processing in js
 
-          // let jscode = "progresscontainer = document.getElementsByClassName('ytp-progress-list')[0]";
-          // jscode+="progresscontainer.innerHTML+='<div class=\"ytp-highlight-progress\" style=\"background-color:turquoise; position:absolute; height:100%; width:30px; left:\"300px\"></div>'";
+          //let jscode = "progresscontainer = document.getElementsByClassName('ytp-progress-list')[0];";
+          //jscode+="progresscontainer.innerHTML+='<div class=\"ytp-highlight-progress\" style=\"background-color:turquoise; position:absolute; height:100%; width:30px; left:300px; \"></div>';";
 
-          // chrome.tabs.executeScript(
-          // {
-          //   code:jscode
-          // },
-          // function() {
-          // console.log("JavaScript executed!");
-          // }
-          // );
+          // var timestampsstring = JSON.stringify(timestamps);
+          // var fs = require('fs');
+          // fs.writeFile("timestamps.json", timestampsstring, function(err, result) {
+          //     if(err) console.log('error', err);
+          // });
+
+          //pass the json string by creating an html element with its value as that string, and then appending that element to the browser
+          
+          let timestampsstring = '[';
+          timestampsstring = timestampsstring.concat(timestamps[0]);
+          let m;
+          for(m=1; m<timestamps.length; m++)
+          {
+            timestampsstring = timestampsstring.concat(", ", timestamps[m]);
+          }
+          timestampsstring = timestampsstring.concat(']');
+
+          let jscode = 'let ele = document.createElement(\'div\');';
+          jscode += 'ele.style.display = "none";';
+          jscode += 'document.body.appendChild(ele);'
+          jscode += 'ele.innerHTML = \'<div class = \\\"extraElement\\\" style=\\\"position:absolute; display:hidden;\\\">' + timestampsstring + '</div>\' ;' ;
+          
+          //document.body.innerHTML += "<p class = \"extraElement\" style=\"position:absolute; display:hidden;\"></p>" ;
+
+          chrome.tabs.executeScript(
+            {
+              code: jscode
+            },
+            function() {
+              console.log("JavaScript executed, innerHTML added!");
+            }
+            );
+          
+          chrome.tabs.executeScript(
+          {
+            file:"highlights.js"
+          },
+          function() {
+            console.log("JavaScript executed!");
+          }
+          );
 
           // let durationvid = (document.getElementsByClassName('ytp-time-duration'))[0].innerHTML
           // let durationsplit = durationvid.split(':')
