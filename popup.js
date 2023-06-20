@@ -13,7 +13,7 @@ function refreshButtons() {
 }
 
 //Clear storage for popup contents when tab focus changes
-chrome.tabs.onActivated.addListener(function (active_info) {
+chrome.tabs.onActivated.addListener((active_info) => {
   chrome.storage.local.clear(() => {
     console.log("clearing storage of popup timestamps");
   });
@@ -21,13 +21,22 @@ chrome.tabs.onActivated.addListener(function (active_info) {
 
 //User search and input
 function user_input(input) {
+  // Don't execute the rest of the function if textbox empty
   if (input.value.length == 0) return;
+  
+  // tabs.query() takes a queryInfo object and a (result: Tab[]) => void type callback function
+  // Documentation link: https://developer.chrome.com/docs/extensions/reference/tabs/#method-query
   chrome.tabs.query(
     {
       active: true,
       currentWindow: true,
     },
     (tabs) => {
+      // format: .tabs.sendMessage(tabId, msg, options?, callback?)
+      //tabs.sendMessage() sends a single message to the content script(s) in the specified tab, 
+      // with an optional callback to run when a response is sent back. 
+      // Parallely, the runtime.onMessage event is fired in each content script running 
+      // in the specified tab for the current extension.
       chrome.tabs.sendMessage(
         tabs[0].id,
         {
