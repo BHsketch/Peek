@@ -28,7 +28,7 @@ var captions_and_timestamps = {};
 // the callback parameter for .runtime.onMessage looks like:
 // (receivedMessage: any, sender: MessageSender, sendResponse: function) => {}
 chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
-  //Populates captions_and_timestamps: called only when youtube video cc is turned on
+  // Populates captions_and_timestamps: called only when youtube video cc is turned on
   // The following if condition triggers from the sendMessage of background.js
   if (response.captions != undefined) {
     fetch(response.captions)
