@@ -14,7 +14,7 @@ function refreshButtons() {
 
 //Clear storage for popup contents when tab focus changes
 chrome.tabs.onActivated.addListener(function (active_info) {
-  chrome.storage.local.clear(function () {
+  chrome.storage.local.clear(() => {
     console.log("clearing storage of popup timestamps");
   });
 });
