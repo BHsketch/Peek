@@ -29,6 +29,7 @@ var captions_and_timestamps = {};
 // (receivedMessage: any, sender: MessageSender, sendResponse: function) => {}
 chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
   //Populates captions_and_timestamps: called only when youtube video cc is turned on
+  // The following if condition triggers from the sendMessage of background.js
   if (response.captions != undefined) {
     fetch(response.captions)
       .then((response) => response.text())
@@ -48,7 +49,8 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
         console.error("Error fetching captions:", error);
       });
   }
-  //Populates list of timestamps when user inputs a word/phrase
+  // Populates list of timestamps when user inputs a word/phrase
+  // The following if condition triggers from the sendMessage() of popup.js
   else if (response.user_search != undefined) {
     var search_results = [];
     var phrase_results = [];
