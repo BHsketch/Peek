@@ -24,7 +24,7 @@ function user_input(input) {
   // Don't execute the rest of the function if textbox empty
   if (input.value.length == 0) return;
   
-  // tabs.query() takes a queryInfo object and a (result: Tab[]) => void type callback function
+  // tabs.query() takes a queryInfo object and a (result: Tab[]) => {} type callback function
   // Documentation link: https://developer.chrome.com/docs/extensions/reference/tabs/#method-query
   chrome.tabs.query(
     {
@@ -33,7 +33,7 @@ function user_input(input) {
     },
     (tabs) => {
       // format: .tabs.sendMessage(tabId, msg, options?, callback?)
-      //tabs.sendMessage() sends a single message to the content script(s) in the specified tab, 
+      // tabs.sendMessage() sends a single message to the content script(s) in the specified tab, 
       // with an optional callback to run when a response is sent back. 
       // Parallely, the runtime.onMessage event is fired in each content script running 
       // in the specified tab for the current extension.
@@ -48,24 +48,20 @@ function user_input(input) {
           console.log(timestamps);
           console.log(phrases);
           var div = document.getElementById("timestamps");
-          //Remove timestamp buttons (search results) from popup
-          while (div.childElementCount > 2) {
-            div.removeChild(div.lastChild);
-          }
+          
           //Display message for no search results found
           if (timestamps.length == 0) {
             let failed_message = document.createElement("h4");
             failed_message.innerHTML = "No search results found";
             div.appendChild(failed_message);
           } else {
-            //Add current search results to display
-            // add_timestamps(div, tabs[0].id, timestamps, phrases);
+            // storing in local storage for now; let's see if we can use this for DOM manipulation
             chrome.storage.local.set(
               {
-                time_keys: timestamps,
-                phrases: phrases,
+                timestamps,
+                phrases,
               },
-              function () {
+              () => {
                 console.log("Storing current popup.html contents");
               }
             );

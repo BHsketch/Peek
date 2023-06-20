@@ -1,6 +1,5 @@
 //Gets captions_url from network_log then sends over to content script for downloading + processing
 var prev_captions_url = "";
-let highlights = [];
 
 chrome.webRequest.onCompleted.addListener(
   (details) => {

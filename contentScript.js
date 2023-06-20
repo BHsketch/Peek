@@ -25,9 +25,6 @@ function populate_captions(response) {
 
 var captions_and_timestamps = {};
 
-// Used for downloading, searching captions, and seeking to a time in a video
-// Message passing occurs between content.js and popup.js here;
-
 // the callback parameter for .runtime.onMessage looks like:
 // (receivedMessage: any, sender: MessageSender, sendResponse: function) => {}
 chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
