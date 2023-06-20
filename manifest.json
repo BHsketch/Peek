@@ -17,8 +17,25 @@
         "default_title": "Ctrl + F for YouTube",
         "default_popup": "popup.html"
     },
-    "permissions": ["storage"],
+    "permissions": [
+        "tabs",
+        "storage",
+        "webRequest"
+    ],
+    "host_permissions": [
+        "https://www.youtube.com/api/timedtext?*"
+    ],
     "background": {
         "service_worker": "background.js"
-    }
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.youtube.com/*"
+            ],
+            "js": [
+                "contentScript.js"
+            ]
+        }
+    ]
 }

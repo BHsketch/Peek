@@ -25,8 +25,8 @@ function populate_captions(response) {
 var captions_and_timestamps = {};
 var Http = new XMLHttpRequest();
 
-//Used for downloading, searching captions, and seeking to a time in a video
-//Message passing occurs between content.js and popup.js here
+// Used for downloading, searching captions, and seeking to a time in a video
+// Message passing occurs between content.js and popup.js here
 chrome.runtime.onMessage.addListener(function(response, sender, send_response) {
     
     //Populates captions_and_timestamps: called only when youtube video cc is turned on
