@@ -1,16 +1,33 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "Ctrl + F for YouTube",
-    "short_name": "YCS",
+    "version": "1.0.0",
     "description": "It's like 'ctrl + f' for YouTube",
-    "version": "0.1.0",
+    "icons": {
+        "16": "images/icon16.png",
+        "48": "images/icon16.png",
+        "128": "images/icon16.png"
+    },
+    "action": {
+        "default_icon": {
+            "16": "images/icon16.png",
+            "24": "images/icon16.png",
+            "32": "images/icon16.png"
+        },
+        "default_title": "Ctrl + F for YouTube",
+        "default_popup": "popup.html"
+    },
     "permissions": [
         "tabs",
         "storage",
-        "webRequest",
-        "https://www.youtube.com/api/timedtext?*",
-        "scripting"
+        "webRequest"
     ],
+    "host_permissions": [
+        "https://www.youtube.com/api/timedtext?*"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
     "content_scripts": [
         {
             "matches": [
@@ -20,35 +37,5 @@
                 "contentScript.js"
             ]
         }
-    ],
-    "background": {
-        "scripts": [
-            "popup.js"
-        ],
-        "persistent": true,
-        "run_at": "document_start"
-    },
-    "browser_action": {
-        "default_icon": "images/icon16.png",
-        "default_popup": "popup.html"
-    },
-    "icons": {
-        "16": "images/icon16.png",
-        "32": "images/icon16.png",
-        "48": "images/icon16.png",
-        "128": "images/icon16.png"
-    },
-    "commands": {
-        "_execute_browser_action": {
-            "suggested_key": {
-                "windows": "Ctrl+Shift+Y",
-                "mac": "Command+Shift+I",
-                "chromeos": "Ctrl+Shift+Y",
-                "linux": "Ctrl+Shift+Y"
-            }
-        }
-    },
-    "web_accessible_resources": [
-        "style.css"
     ]
 }
