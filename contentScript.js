@@ -55,6 +55,8 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
     var search_results = [];
     var phrase_results = [];
 
+    //calls appropriate functions to add or remove(existing) highlights depending on
+    //if the "keyup" event results in an empty or non-empty string
     if(response.user_search != "")
     {
       for (var caption in captions_and_timestamps) {
@@ -148,7 +150,7 @@ function changeDOMtimeline(timestamps) {
   }
 }
 
-
+//removes existing highlights
 function removeAllHighlights()
 {
   let parent = document.getElementsByClassName("ytp-progress-list")[0];
