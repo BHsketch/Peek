@@ -83,6 +83,8 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
       timestamps: search_results,
       phrases: phrase_results,
     });
+  }else if(response.url != undefined){
+    removeAllHighlights();
   }
 });
 

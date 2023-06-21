@@ -32,3 +32,10 @@ chrome.webRequest.onCompleted.addListener(
     urls: ["https://www.youtube.com/api/timedtext?*"],
   }
 );
+
+
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+  if (changeInfo.url) {
+    chrome.tabs.sendMessage(tabId, { message: 'URLChanged', url: changeInfo.url });
+  }
+});
