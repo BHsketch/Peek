@@ -31,6 +31,8 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
   // Populates captions_and_timestamps: called only when youtube video cc is turned on
   // The following if condition triggers from the sendMessage of background.js
   if (response.captions != undefined) {
+    //console.log("new web request");
+    removeAllHighlights();
     fetch(response.captions)
       .then((response) => response.text())
       .then((responseText) => {
@@ -108,7 +110,7 @@ function changeDOMtimeline(timestamps) {
 
   //now we have the total duration of the video
 
-  let parent = document.getElementsByClassName("ytp-progress-list")[0];
+  let parent = document.getElementsByClassName("ytp-timed-markers-container")[0];
 
   let len;
   len = document.getElementsByClassName("highlights-wrapper");
@@ -143,8 +145,9 @@ function changeDOMtimeline(timestamps) {
     child.style.backgroundColor = "turquoise";
     child.style.position = "absolute";
     child.style.height = "100%";
+    child.style.zIndex = "35"
     child.style.left = ratio + "%";
-    child.style.width = "1px";
+    child.style.width = "2px";
 
     wrapper.appendChild(child);
   }
@@ -153,7 +156,7 @@ function changeDOMtimeline(timestamps) {
 //removes existing highlights
 function removeAllHighlights()
 {
-  let parent = document.getElementsByClassName("ytp-progress-list")[0];
+  let parent = document.getElementsByClassName("ytp-timed-markers-container")[0];
 
   let len;
   len = document.getElementsByClassName("highlights-wrapper");
@@ -171,4 +174,6 @@ function removeAllHighlights()
   }
 
   wrapper.innerHTML = "";
+
+  console.log("highlights deleted");
 }

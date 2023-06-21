@@ -21,6 +21,7 @@ chrome.webRequest.onCompleted.addListener(
           return;
         }
         prev_captions_url = captions_url;
+        console.log("new web request in background.js");
         chrome.tabs.sendMessage(tabs[0].id, {
           captions: captions_url,
         });
