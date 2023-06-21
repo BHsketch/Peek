@@ -15,7 +15,8 @@ function refreshButtons() {
 //User search and input
 function user_input(input) {
   // Don't execute the rest of the function if textbox empty
-  if (input.value.length == 0) return;
+  
+  ///if (input.value.length == 0) return;
 
   // tabs.query() takes a queryInfo object and a (result: Tab[]) => {} type callback function
   // Documentation link: https://developer.chrome.com/docs/extensions/reference/tabs/#method-query

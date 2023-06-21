@@ -54,19 +54,27 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
   else if (response.user_search != undefined) {
     var search_results = [];
     var phrase_results = [];
-    for (var caption in captions_and_timestamps) {
-      if (caption.includes(response.user_search)) {
-        search_results.push(captions_and_timestamps[caption]);
-        let caption_split = caption.split(response.user_search);
-        let colored_search =
-          "<mark border-radius=20%>" + response.user_search + "</mark>";
-        let colored_caption =
-          caption_split[0] + colored_search + caption_split[1];
-        phrase_results.push(colored_caption);
+
+    if(response.user_search != "")
+    {
+      for (var caption in captions_and_timestamps) {
+        if (caption.includes(response.user_search)) {
+          search_results.push(captions_and_timestamps[caption]);
+          let caption_split = caption.split(response.user_search);
+          let colored_search =
+            "<mark border-radius=20%>" + response.user_search + "</mark>";
+          let colored_caption =
+            caption_split[0] + colored_search + caption_split[1];
+          phrase_results.push(colored_caption);
+        }
       }
+
+      console.log(search_results);
+      changeDOMtimeline(search_results);
+    }else{
+      removeAllHighlights();
     }
-    console.log(search_results);
-    changeDOMtimeline(search_results);
+    
     sendResponse({
       timestamps: search_results,
       phrases: phrase_results,
@@ -138,4 +146,27 @@ function changeDOMtimeline(timestamps) {
 
     wrapper.appendChild(child);
   }
+}
+
+
+function removeAllHighlights()
+{
+  let parent = document.getElementsByClassName("ytp-progress-list")[0];
+
+  let len;
+  len = document.getElementsByClassName("highlights-wrapper");
+  let wrapper;
+
+  if(len.length == 0)
+  {
+    wrapper = document.createElement("div");
+    wrapper.className = "highlights-wrapper";
+    parent.appendChild(wrapper);
+    console.log("wrapper created");
+  }else{
+    wrapper = len[0];
+    console.log("wrapper assigned");
+  }
+
+  wrapper.innerHTML = "";
 }
