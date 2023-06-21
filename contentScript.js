@@ -98,6 +98,25 @@ function changeDOMtimeline(timestamps) {
 
   //now we have the total duration of the video
 
+  let parent = document.getElementsByClassName("ytp-progress-list")[0];
+
+  let len;
+  len = document.getElementsByClassName("highlights-wrapper");
+  let wrapper;
+
+  if(len.length == 0)
+  {
+    wrapper = document.createElement("div");
+    wrapper.className = "highlights-wrapper";
+    parent.appendChild(wrapper);
+    console.log("wrapper created");
+  }else{
+    wrapper = len[0];
+    console.log("wrapper assigned");
+  }
+
+  wrapper.innerHTML = "";
+  
   for (i = 0; i < timestamps.length; i++) {
     console.log("iteration" + i);
     timestamps[i] = Math.floor(timestamps[i]);
@@ -108,7 +127,7 @@ function changeDOMtimeline(timestamps) {
     //progresscontainer = document.getElementsByClassName('ytp-progress-list')[0];
     //progresscontainer.innerHTML+='<div class=\"ytp-highlight-progress\" style=\"background-color:turquoise; position:absolute; height:100%; width:10px; left:' + toString(ratio) + '%\"></div>';
 
-    let parent = document.getElementsByClassName("ytp-progress-list")[0];
+    
     let child = document.createElement("div");
     child.className = "ytp-highlight-progress";
     child.style.backgroundColor = "turquoise";
@@ -117,6 +136,6 @@ function changeDOMtimeline(timestamps) {
     child.style.left = ratio + "%";
     child.style.width = "1px";
 
-    parent.appendChild(child);
+    wrapper.appendChild(child);
   }
 }
