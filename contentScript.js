@@ -153,8 +153,9 @@ function changeDOMtimeline(timestamps, phrases) {
     let phrasechild = document.createElement("div");
     phrasechild.className = "ytp-highlight-phrase";
     phrasechild.style.position = "absolute";
-    //phrasechild.style.height = "30px";
-    phrasechild.style.setProperty('height', '15px', 'important');
+    phrasechild.style.height = "auto";
+    phrasechild.style.display = "inline-block";
+    //phrasechild.style.setProperty('height', '15px', 'important');
     phrasechild.style.width = "250px";
     phrasechild.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
     phrasechild.style.borderRadius = "7px";
