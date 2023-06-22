@@ -165,7 +165,7 @@ function changeDOMtimeline(timestamps, phrases) {
     phrasechild.style.fontFamily = "Monospace";
     phrasechild.style.zIndex = "500"
     phrasechild.style.left = "-125px"
-    phrasechild.style.bottom = "90px";
+    phrasechild.style.bottom = "105px";
     phrasechild.style.visibility = "hidden";
     phrasechild.innerHTML = phrases[i];
 
