@@ -66,7 +66,7 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
           search_results.push(captions_and_timestamps[caption]);
           let caption_split = caption.split(response.user_search);
           let colored_search =
-            "<mark border-radius=20%>" + response.user_search + "</mark>";
+            "<mark border-radius=20% style= \"background-color:turquoise; color: black;\" >" + response.user_search + "</mark>";
           let colored_caption =
             caption_split[0] + colored_search + caption_split[1];
           phrase_results.push(colored_caption);
@@ -74,7 +74,7 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
       }
 
       console.log(search_results);
-      changeDOMtimeline(search_results);
+      changeDOMtimeline(search_results, phrase_results);
     }else{
       removeAllHighlights();
     }
@@ -88,7 +88,7 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
   }
 });
 
-function changeDOMtimeline(timestamps) {
+function changeDOMtimeline(timestamps, phrases) {
   let durationvid =
     document.getElementsByClassName("ytp-time-duration")[0].innerHTML;
   let durationsplit = durationvid.split(":");
@@ -141,6 +141,41 @@ function changeDOMtimeline(timestamps) {
     //progresscontainer = document.getElementsByClassName('ytp-progress-list')[0];
     //progresscontainer.innerHTML+='<div class=\"ytp-highlight-progress\" style=\"background-color:turquoise; position:absolute; height:100%; width:10px; left:' + toString(ratio) + '%\"></div>';
 
+    let childwrapper = document.createElement("div");
+    childwrapper.className = "highlightPhraseWrapper";
+    childwrapper.style.position = "absolute";
+    childwrapper.style.height = "100%";
+    childwrapper.style.zIndex = "35"
+    childwrapper.style.left = ratio + "%";
+    childwrapper.style.width = "2px";
+    childwrapper.style.overflow = "visible";
+
+    let phrasechild = document.createElement("div");
+    phrasechild.className = "ytp-highlight-phrase";
+    phrasechild.style.position = "absolute";
+    //phrasechild.style.height = "30px";
+    phrasechild.style.setProperty('height', '15px', 'important');
+    phrasechild.style.width = "250px";
+    phrasechild.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+    phrasechild.style.borderRadius = "7px";
+    phrasechild.style.paddingLeft = "8px";
+    phrasechild.style.paddingTop = "5px";
+    phrasechild.style.paddingBottom = "3px";
+    phrasechild.style.color = "white";
+    phrasechild.style.fontFamily = "Monospace";
+    phrasechild.style.zIndex = "500"
+    phrasechild.style.left = "-125px"
+    phrasechild.style.bottom = "90px";
+    phrasechild.style.visibility = "hidden";
+    phrasechild.innerHTML = phrases[i];
+
+    // const markElements = document.getElementsByTagName('mark');
+    // // Change the color of the <mark> tag
+    // for(let m = 0; m<markElements.length; m++)
+    // {
+    //   markElements[m].style.backgroundColor = 'turquoise';
+    //   markElements[m].style.color = 'black';
+    // }
     
     let child = document.createElement("div");
     child.className = "ytp-highlight-progress";
@@ -151,7 +186,20 @@ function changeDOMtimeline(timestamps) {
     child.style.left = ratio + "%";
     child.style.width = "2px";
 
-    wrapper.appendChild(child);
+    child.addEventListener('mouseover', function() {
+      // Change the visibility of the phrase to visible
+      phrasechild.style.visibility = 'visible';
+    });
+
+    child.addEventListener('mouseout', function() {
+      // Change the visibility of element1 to hidden
+      phrasechild.style.visibility = 'hidden';
+    });
+
+    childwrapper.appendChild(phrasechild);
+    childwrapper.appendChild(child);
+
+    wrapper.appendChild(childwrapper);
   }
 }
 
