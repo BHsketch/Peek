@@ -1,16 +1,40 @@
 body {
   width: 288px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: beige;
-  opacity: 0.8; /* Adjust opacity value to your preference */
+  padding: 20px;
+  overflow: hidden;
+  text-align: center;
+  background: linear-gradient(45deg, #6aa6d9, #1c537e);
+  animation: gradientAnimation 5s linear infinite alternate;
 }
 
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+img
+{
+  vertical-align: middle;
+  height: 25px;
+  width:auto;
+
+  margin-bottom: 5;
+}
 input {
   margin: 5px auto 4px;
   width: 100%;
   padding: 8px;
-  border-radius: 3px;
+  border-radius: 10px;
   border: 1px solid black;
   box-sizing: border-box;
 }
-
+span{
+  color: turquoise;
+}
+input:focus {
+  outline: none;
+}
