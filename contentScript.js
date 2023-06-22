@@ -108,7 +108,7 @@ function changeDOMtimeline(timestamps, phrases) {
       durationsplit[durationsplit.length - 1 - i] * Math.pow(60, i);
   }
 
-  console.log(durationinseconds);
+  console.log("duration in seconds: " + durationinseconds);
 
   //now we have the total duration of the video
 
@@ -133,9 +133,9 @@ function changeDOMtimeline(timestamps, phrases) {
   
   for (i = 0; i < timestamps.length; i++) {
     console.log("iteration" + i);
-    timestamps[i] = Math.floor(timestamps[i]);
+    //timestamps[i] = Math.floor(timestamps[i]);
     let ratio = timestamps[i] / durationinseconds;
-    ratio = Math.floor(ratio * 100);
+    ratio = ratio * 100;
     console.log(ratio);
     //ratio in percentage
     //progresscontainer = document.getElementsByClassName('ytp-progress-list')[0];
