@@ -1,7 +1,7 @@
 body {
   width: 288px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: beige;
+  background-color: rgba(0, 0, 0, 0.653);
   opacity: 0.8; /* Adjust opacity value to your preference */
 }
 
@@ -14,3 +14,12 @@ input {
   box-sizing: border-box;
 }
 
+mark {
+  border-radius: 10px;
+  background-color:rgba(64, 224, 208, 0.566);
+  padding:5px;
+}
+
+h1, h2{
+  display:inline-block;
+}

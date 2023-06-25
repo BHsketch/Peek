@@ -21,9 +21,65 @@ function populate_captions(response) {
   }
   return captions_and_timestamps;
 }
+function convert_time(input){
+  let hours = Math.floor(input/3600);
+  let minutes = Math.floor((input%3600)/60);
+  let seconds = Math.floor((input%60));
+
+  console.log(hours);
+  console.log(minutes);
+  console.log(seconds);
+
+  let returnval = hours.toString() + ":" + minutes.toString() + ":" + seconds.toString();
+  return returnval;
+}
+function timeoutfunc(){
+  setTimeout(function() {
+    calculateOffsetHeight();
+  }, 2000);
+}
+function calculateOffsetHeight(){
+  let video = document.getElementsByClassName('html5-main-video')[0];
+  offsetreturnval = 0.2*(video.offsetHeight);
+}
+function calculateRatio(timestamps, durationinseconds, i){
+    let ratio = timestamps[i] / durationinseconds;
+    ratio = ratio * 100;
+    let ratio2 = ratio/100;
+
+    let listofchapterelements = document.getElementsByClassName('ytp-chapter-hover-container');
+    let listofpercentages = [];
+    let sum = 0;
+    let sum2 = 0;
+
+    for(let i = 0; i< listofchapterelements.length; i++)
+    {
+      sum += listofchapterelements[i].offsetWidth;
+    }
+
+    console.log("sum: " + sum);
+
+    for(let i = 0; i< listofchapterelements.length; i++)
+    {
+      listofpercentages.push((listofchapterelements[i].offsetWidth) / sum);
+    }
+
+    for(let i = 0; i< listofpercentages.length; i++)
+    {
+      sum2 += listofpercentages[i];
+      if(sum2 >= ratio2)
+      {
+        return ((ratio2*sum) + Math.floor((i-1)*2.1));
+      }
+    }
+
+    console.log(ratio);
+}
 // End of Helper Functions
 
+var vid_url;
 var captions_and_timestamps = {};
+var offsetreturnval;
 
 // the callback parameter for .runtime.onMessage looks like:
 // (receivedMessage: any, sender: MessageSender, sendResponse: function) => {}
@@ -85,6 +141,7 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
     });
   }else if(response.url != undefined){
     removeAllHighlights();
+    vid_url = response.url;
   }
 });
 
@@ -131,24 +188,31 @@ function changeDOMtimeline(timestamps, phrases) {
 
   wrapper.innerHTML = "";
   
+  calculateOffsetHeight();
+
   for (i = 0; i < timestamps.length; i++) {
     console.log("iteration" + i);
-    //timestamps[i] = Math.floor(timestamps[i]);
-    let ratio = timestamps[i] / durationinseconds;
-    ratio = ratio * 100;
-    console.log(ratio);
-    //ratio in percentage
-    //progresscontainer = document.getElementsByClassName('ytp-progress-list')[0];
-    //progresscontainer.innerHTML+='<div class=\"ytp-highlight-progress\" style=\"background-color:turquoise; position:absolute; height:100%; width:10px; left:' + toString(ratio) + '%\"></div>';
+  
+    // let ratio = timestamps[i] / durationinseconds;
+    // ratio = ratio * 100;
+    // console.log(ratio);
 
+    let highlightleftoffset = calculateRatio(timestamps, durationinseconds, i);
+    //ratio in percentage
+    
     let childwrapper = document.createElement("div");
     childwrapper.className = "highlightPhraseWrapper";
     childwrapper.style.position = "absolute";
     childwrapper.style.height = "100%";
-    childwrapper.style.zIndex = "35"
-    childwrapper.style.left = ratio + "%";
+    childwrapper.style.zIndex = "100"
+    childwrapper.style.left = highlightleftoffset + "px";
     childwrapper.style.width = "2px";
     childwrapper.style.overflow = "visible";
+    childwrapper.style.padding = "0px";
+
+    //calculating time stamps in hours:minutes:seconds:
+    let displaytime = convert_time(timestamps[i]);
+    timeoutfunc();
 
     let phrasechild = document.createElement("div");
     phrasechild.className = "ytp-highlight-phrase";
@@ -164,32 +228,42 @@ function changeDOMtimeline(timestamps, phrases) {
     phrasechild.style.paddingBottom = "3px";
     phrasechild.style.color = "white";
     phrasechild.style.fontFamily = "Monospace";
-    phrasechild.style.zIndex = "500"
+    phrasechild.style.zIndex = "100"
     phrasechild.style.left = "-125px"
-    phrasechild.style.bottom = "105px";
+    phrasechild.style.bottom = offsetreturnval.toString() + "px";
     phrasechild.style.visibility = "hidden";
-    phrasechild.innerHTML = phrases[i];
+    phrasechild.innerHTML = displaytime + " | " + phrases[i];
 
-    // const markElements = document.getElementsByTagName('mark');
-    // // Change the color of the <mark> tag
-    // for(let m = 0; m<markElements.length; m++)
-    // {
-    //   markElements[m].style.backgroundColor = 'turquoise';
-    //   markElements[m].style.color = 'black';
-    // }
-    
+    // let timelink = document.createElement("a");
+    // timelink.className = "highlight-time-link";
+    // timelink.style.position = "absolute";
+    // timelink.style.height = "100%";
+    // timelink.style.width = "2px";
+    // timelink.style.zIndex = "100"
+    // let urlsplit = vid_url.split("&t=");
+    // timelink.href = urlsplit[0] + "&t=" + (Math.floor(timestamps[i])).toString() + "s";
+    // timelink.onclick = "window.open(this.href,'_blank');return false;";
+
+
     let child = document.createElement("div");
     child.className = "ytp-highlight-progress";
     child.style.backgroundColor = "turquoise";
     child.style.position = "absolute";
     child.style.height = "100%";
-    child.style.zIndex = "35"
-    child.style.left = ratio + "%";
+    child.style.zIndex = "100"
+    child.style.right = "2px"
     child.style.width = "2px";
+
+    // child.addEventListener('click', function() {
+    //   window.location.href = urlsplit[0] + 't=' + (Math.floor(timestamps[i])).toString() + 's';
+    // });
 
     child.addEventListener('mouseover', function() {
       // Change the visibility of the phrase to visible
       phrasechild.style.visibility = 'visible';
+
+      calculateOffsetHeight();
+      phrasechild.style.bottom = offsetreturnval.toString() + "px";
     });
 
     child.addEventListener('mouseout', function() {
@@ -197,9 +271,16 @@ function changeDOMtimeline(timestamps, phrases) {
       phrasechild.style.visibility = 'hidden';
     });
 
+    let fullscreenbutton = document.getElementsByClassName('ytp-fullscreen-button')[0];
+
+    // fullscreenbutton.addEventListener('click', function () {
+    //   timeoutfunc();
+    //   phrasechild.style.bottom = offsetreturnval.toString() + "px";
+    // })
+
     childwrapper.appendChild(phrasechild);
     childwrapper.appendChild(child);
-
+    
     wrapper.appendChild(childwrapper);
   }
 }
