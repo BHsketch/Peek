@@ -15,11 +15,13 @@ The version 1.0.0 works, unfortunately, only for videos with a transcript. But w
 
 ## What it looks like
 
-![extension_popup](images/extension_popup.png)  
-![context_screenshot](images/context_screenshot.png)
+![extension_popup](./images/extensionpopup.png)  
+![context_screenshot](./images/contextscreenshot.png)
 
 video in the screenshot:
 https://www.youtube.com/watch?v=1W1FtRaY69Y
+
+
 
 ## Components:
 <ul>
@@ -28,5 +30,7 @@ https://www.youtube.com/watch?v=1W1FtRaY69Y
 <li>Front end for the extension - using HTML and CSS</li>
 <li>Potentially some Python for natural language processing</li>
 </ul>
+
+This project was built as a part of the DotSlash 6.0 hackathon.
 
 
