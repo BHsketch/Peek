@@ -12,6 +12,8 @@ The version 1.0.0 works, unfortunately, only for videos with a transcript. But w
 * Fire up your browser and go to chrome://extensions/
 * Select "developer mode"
 * Click on "load unpacked" and select your extracted folder
+* Make sure the captions are turned on for the video you want to search in
+* Enjoy
 
 ## What it looks like
 
