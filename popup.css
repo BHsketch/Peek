@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Hubballi&family=Montserrat:wght@200&family=Poppins:wght@200;300;400;700&display=swap');
+
 body {
   width: 288px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   padding: 20px;
   overflow: hidden;
   text-align: center;
@@ -39,6 +41,61 @@ input:focus {
   outline: none;
 }
 
-h1, h2{
+h1, h2, h3{
   display:inline-block;
+}
+
+h1{
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+mark{
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.titlediv{
+  padding:0px;
+  margin:0px;
+  display:inline-block;
+  font-size:15px;
+  font-weight:400;
+}
+
+.peek{
+  font-family: 'Montserrat', sans-serif;
+  font-size:30px;
+  font-weight:700;
+}
+
+p{
+  margin:2px;
+}
+
+hr{
+  background-color: black;
+  border-color:black;
+  border-width:1px;
+  border:solid 1px;
+  margin-top:20px;
+}
+
+li{
+  text-align:justify;
+  margin-bottom:10px;
+}
+
+.description, .notes{
+  font-family:'Poppins', sans-serif;
+  font-weight: 200;
+}
+
+.findtext{
+  padding-top:10px;
+  text-align:center;
+}
+
+ul{
+  padding-left:10px;
+  list-style-type: circle;
 }

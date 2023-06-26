@@ -7,14 +7,43 @@
 </head>
 
 <body>
-    <h1>Peek<img src="./images/icon16.png"></h1>
-    <h3>CTRL+F but for YouTube Videos!</h3>
-    <h4> <span> Find </span>text:</h4>
+    <!-- <h1>PEEK<img src="./images/icon16.png"></h1> -->
+    <div>
+        <div class="titlediv">
+            <p class = "peek">Peek</p>
+        </div>
+        <div class="titlediv">
+            <!-- <img src="./images/icon16.png"> -->
+        </div>
+    </div>
+ 
+    <div>
+        <p class = "description">CTRL+F, but for YouTube !</p>
+    </div>
+    <div class="findtext">
+        <p>Find Text:</p>
+    </div>
+
     <div id="timestamps">
         <input id="phrase-box" class="form-control" type="search" placeholder="Type to begin search..."
             autofocus="autofocus" />
     </div>
-    <h4>Searched text will be <mark style="background-color: turquoise; color:black; border-radius:5px;">highlighted</mark> on the progress bar!</h4>
+
+    <hr>
+
+    <div class="notes">
+        <ul>
+            <li>
+                Instances of the searched text will be <mark style="background-color: turquoise; color:black;">highlighted</mark> on the progress bar!
+            </li>
+            <li>
+                Hover your cursor over the highlights to get the timestamps and context.
+            </li>
+            <li>
+                This extension is far from perfect, and improvements will be made in the future. In the meantime, we hope it made your life a little bit easier :)
+            </li>
+        </ul>
+    </div>
     <script src="popup.js"></script>
 </body>
 
