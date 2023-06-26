@@ -46,6 +46,7 @@ function calculateRatio(timestamps, durationinseconds, i){
     let ratio = timestamps[i] / durationinseconds;
     ratio = ratio * 100;
     let ratio2 = ratio/100;
+    globalratio = ratio;
 
     let listofchapterelements = document.getElementsByClassName('ytp-chapter-hover-container');
     let listofpercentages = [];
@@ -72,7 +73,7 @@ function calculateRatio(timestamps, durationinseconds, i){
         return ((ratio2*sum) + Math.floor((i-1)*2.1));
       }
     }
-
+  
     console.log(ratio);
 }
 // End of Helper Functions
@@ -80,6 +81,7 @@ function calculateRatio(timestamps, durationinseconds, i){
 var vid_url;
 var captions_and_timestamps = {};
 var offsetreturnval;
+var globalratio;
 
 // the callback parameter for .runtime.onMessage looks like:
 // (receivedMessage: any, sender: MessageSender, sendResponse: function) => {}
@@ -233,6 +235,16 @@ function changeDOMtimeline(timestamps, phrases) {
     phrasechild.style.bottom = offsetreturnval.toString() + "px";
     phrasechild.style.visibility = "hidden";
     phrasechild.innerHTML = displaytime + " | " + phrases[i];
+
+    //setting edge cases for when the highlight overflows the video player
+    if(globalratio > 90)
+    {
+      phrasechild.style.left = "-250px"
+    }
+    if(globalratio < 10)
+    {
+      phrasechild.style.left = "0px";
+    }
 
     // let timelink = document.createElement("a");
     // timelink.className = "highlight-time-link";
