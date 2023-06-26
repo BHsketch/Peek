@@ -15,8 +15,8 @@ The version 1.0.0 works, unfortunately, only for videos with a transcript. But w
 
 ## What it looks like
 
-![extension_popup](./images/extensionpopup.png)  
-![context_screenshot](./images/contextscreenshot.png)
+![extension_popup](./images/extensionpopup.PNG)  
+![context_screenshot](./images/contextscreenshot.PNG)
 
 video in the screenshot:
 https://www.youtube.com/watch?v=1W1FtRaY69Y
