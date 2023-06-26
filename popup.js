@@ -12,6 +12,12 @@ function refreshButtons() {
   user_input(phraseBox);
 }
 
+function displayNumberOfResults(div, num_of_results){
+  let success_message = document.createElement("h4");
+  success_message.innerHTML = num_of_results.toString() + "instances found";
+  div.appendChild(success_message);
+}
+
 //User search and input
 function user_input(input) {
   // Don't execute the rest of the function if textbox empty
@@ -43,13 +49,20 @@ function user_input(input) {
           console.log(phrases);
 
           const div = document.getElementById("timestamps");
-
+          //displayNumberOfResults(div, timestamps.length);
+          
           // Removes the "No search results found" message if a matching string is further found
           while (div.childElementCount > 1) {
             div.removeChild(div.lastChild);
           }
+          //display number of results found
+          if (timestamps.length > 0) {
+            let success_message = document.createElement("h4");
+            success_message.innerHTML = "<b>" + (timestamps.length).toString() + "</b> instances found";
+            div.appendChild(success_message);
+          }
           // Display message for no search results found
-          if (timestamps.length == 0 && div.childElementCount < 2) {
+          if (timestamps.length == 0) {
             let failed_message = document.createElement("h4");
             failed_message.innerHTML = "No search results found";
             div.appendChild(failed_message);
