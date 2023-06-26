@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Ctrl + F for YouTube",
-    "version": "1.0.0",
+    "version": "0.1.0",
     "description": "It's like 'ctrl + f' for YouTube",
     "icons": {
         "16": "images/icon16.png",
