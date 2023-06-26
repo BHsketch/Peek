@@ -1,10 +1,25 @@
-# DOT SLASH 6.0
+# Peek
 
-This is basically an extension, in which you type the word you are searching for.
-Then the extension checks the timestamps of the occurrence of the string, and then highlights the part of the video.
-It checks transcripts, and then the timestamps is highlighted.
-We plan on  implementing  Natural Language processing for the videos with no captions, so as to increase the accessibility and the utility of the project.
+## What is Peek?
 
+The CTRL+F command is our go-to whenever we want to search something on a website or in a pdf file. But how does one search in a YouTube video? How do you know how many times a person said "machine learning" in the video, for example. You could look through the transcripts, but that is a tad bit inconvenient! 
+Peek is a chrome extension built for just that. Search a word, and it will highlight all instances where the word was spoken on the youtube progress bar. Hover over a highlight and you will see the timestamp and the context around the word (the phrase currently being spoken that this word is a part of).
+The version 1.0.0 works, unfortunately, only for videos with a transcript. But we hope to improve this extension so as to not be reliant on that.
+
+## Test it out
+
+* Download the zip file from the latest release and extract it on your machine.
+* Fire up your browser and go to chrome://extensions/
+* Select "developer mode"
+* Click on "load unpacked" and select your extracted folder
+
+## What it looks like
+
+![extension_popup](./images/extension_popup.png)  
+![context_screenshot](./images/context_screenshot.png)
+
+video in the screenshot:
+https://www.youtube.com/watch?v=1W1FtRaY69Y
 
 ## Components:
 <ul>
