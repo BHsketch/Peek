@@ -81,6 +81,7 @@ hr{
 }
 
 li{
+  font-weight:400;
   text-align:justify;
   margin-bottom:10px;
 }
