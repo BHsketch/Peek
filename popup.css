@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Hubballi&family=Montserrat:wght@200&family=Poppins:wght@200;300;400;700&display=swap');
 
 body {
@@ -6,7 +7,7 @@ body {
   padding: 20px;
   overflow: hidden;
   text-align: center;
-  background: linear-gradient(45deg, #6aa6d9, #1c537e);
+  background: linear-gradient(45deg, #1b1b1b, #474747);
   animation: gradientAnimation 5s linear infinite alternate;
 }
 
@@ -23,7 +24,6 @@ img
   vertical-align: middle;
   height: 25px;
   width:auto;
-
   margin-bottom: 5;
 }
 input {
@@ -49,9 +49,16 @@ h1{
   font-family: "Lucida Console", "Courier New", monospace;
 }
 
+h4{
+  font-family: "Lucida Console", "Courier New", monospace;
+  color:#bc8700;
+}
+
 mark{
   padding-top: 3px;
   padding-bottom: 3px;
+  padding-left:3px;
+  padding-right:3px;
 }
 
 .titlediv{
@@ -81,22 +88,92 @@ hr{
 }
 
 li{
-  font-weight:400;
+  font-weight:200;
   text-align:justify;
   margin-bottom:10px;
 }
 
 .description, .notes{
   font-family:'Poppins', sans-serif;
-  font-weight: 200;
+  font-weight: 300;
+  font-size:12px;
+  padding:0px;
 }
 
 .findtext{
+  font-size:13px;
   padding-top:10px;
-  text-align:center;
+  text-align:left;
+  font-weight:400;
 }
 
 ul{
   padding-left:10px;
   list-style-type: circle;
+}
+
+.icon{
+  display: inline-block;
+  padding:7px;
+  position:absolute;
+  left:35px;
+  top:35px;
+  border-radius:50%;
+}
+
+img{
+  height:40px;
+}
+
+.bg_yellow, .contactus{
+  border-radius:10px;
+  padding:15px;
+  background-image: linear-gradient(to bottom left, #ffc700, #bc7100);
+}
+
+.findtext, .notes{
+  color:white;
+}
+
+.notes{
+  padding-left:15px;
+  padding-right:15px;
+  padding-top:10px;
+  border:#bc8700 1px solid;
+  border-radius:10px;
+  margin-top:15px;
+}
+
+.list{
+  text-align:justify;
+  font-size:12px;
+  font-weight:300;
+}
+
+.pleasenote{
+  font-size:13px;
+  font-weight:400;
+  text-align:left;
+  padding-left:7px;
+}
+
+.search{
+  margin-top:10px;
+  margin-bottom:15px;
+}
+
+.contactus{
+  display:inline-block;
+  padding:5px;
+  margin-top:20px;
+  width:100%;
+  margin-left:0px;
+  border-radius:5px;
+}
+
+a{
+  text-align:left;
+  color:black;
+  text-decoration:none;
+  font-family: "Lucida Console", "Courier New", monospace;
 }
